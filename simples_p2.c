@@ -7,6 +7,7 @@ true)
 */
 
 #include <stdio.h>
+#include <math.h>
 
 #define TOTAL_NUMBERS 10
 
@@ -37,20 +38,24 @@ int main() {
 
 int number_is_perfect(unsigned long long int number) {
 
-    unsigned long long int sumDivisers = 0;
+    unsigned long long int perfectNumber = 0;
     int isPerfect = 0; // Por padrao o numero nao eh perfeito
 
-    // o Contador vai de 0 ate o numero - 1 (operador <) e testa todas as possibilidades
-    for (unsigned long long int counter = 1; counter  < number; counter++) {
-        if (number % counter == 0) {
-            sumDivisers += counter;
-        }
-    } 
+    printf("\n\n");
+    // Testa todas as possibilidades usando a formula do numero perfeito
+    // pow(2, n−1) * (pow(2, n) - 1)
+    // Este loop se encerra apos o numero perfeito for maior que o numero testado
+    for (int counter = 1; perfectNumber <= number ; counter++) {
+        
+        perfectNumber = pow(2, counter - 1) * (pow(2, counter) - 1);
 
-    // Se a soma dos divisores for igual ao proprio numero, entao ele eh perfeito
-    if (sumDivisers == number) {
-        isPerfect = 1;
+        // Se o numero perfeito calculado for igual ao proprio numero, entao ele eh perfeito
+        if (perfectNumber == number) {
+            isPerfect = 1;
+            break;
+        }
     }
+    printf("\n\n");
 
     return isPerfect;
 }
